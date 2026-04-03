@@ -302,6 +302,7 @@ const ChatbotDrawer: React.FC<ChatbotDrawerProps> = ({ isOpen, onClose }) => {
             ))}
           </div>
         )}
+        
 
         {/* Input */}
         <div className="px-4 pb-6 pt-2 border-t border-[#f0edf8]">
