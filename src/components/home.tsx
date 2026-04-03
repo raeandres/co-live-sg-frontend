@@ -75,6 +75,8 @@ const Home: React.FC = () => {
           setLatitude={setLatitude}
           setLongitude={setLongitude}
           style='`w-full h-full px-4 py-2 border-b-[1px] border-[#E5E5E3]`'
+          onInterestClick={handleInterestClick}
+          onChatClick={handleChatClick}
         />
         // <div className="flex flex-col">
         //   <span className="text-xl">Address: ${address}</span>

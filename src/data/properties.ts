@@ -39,9 +39,9 @@ export interface Property {
 export const PROPERTIES: Property[] = [
   {
     id: "1",
-    name: "Colive Orchard Residences",
-    address: "123 Orchard Road, Singapore 238858",
-    mrt: "Orchard MRT",
+    name: "Colive River Valley",
+    address: "486 River Valley Road, Singapore 248370",
+    mrt: "Great World MRT",
     images: [
       "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
       "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800",
@@ -70,9 +70,9 @@ export const PROPERTIES: Property[] = [
   },
   {
     id: "2",
-    name: "Colive Tiong Bahru Loft",
-    address: "45 Tiong Bahru Road, Singapore 168731",
-    mrt: "Tiong Bahru MRT",
+    name: "Colive Sunshine Terrace",
+    address: "22C Sunshine Terrace, Singapore 535698",
+    mrt: "Serangoon MRT",
     images: [
       "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
       "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800",
@@ -87,8 +87,8 @@ export const PROPERTIES: Property[] = [
     totalTravelTime: "18 min",
     estimatedFare: 1.8,
     transitSteps: [
-      { mode: "Walk", instruction: "Walk to Tiong Bahru MRT", duration: "5 min" },
-      { mode: "MRT", instruction: "Take East-West Line to Raffles Place", duration: "13 min", line: "EW Line" },
+      { mode: "Walk", instruction: "Walk to Seranggon MRT", duration: "7 min" },
+      { mode: "MRT", instruction: "Take North-East Line to Outram Park", duration: "20 min", line: "NELine" },
     ],
     amenities: [
       { name: "Tiong Bahru Market", type: "food", distance: "300m", time: "4 min walk" },
