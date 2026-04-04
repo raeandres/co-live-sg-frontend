@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import BottomNav from "./BottomNav";
-import MapView from "./MapView";
-import GoogleMaps from "./GoogleMaps";
 import ExploreView from "./ExploreView";
 import InterestForm from "./InterestForm";
 import Testimonials from "./Testimonials";
 import ChatbotDrawer from "./ChatbotDrawer";
 import PropertySheet from "./PropertySheet";
 import { Property } from "@/data/properties";
-
+import MapView from "./MapView";
 type Tab = "map" | "explore" | "interest" | "testimonials";
 
 const Home: React.FC = () => {
@@ -39,18 +37,6 @@ const Home: React.FC = () => {
     setExploreSelectedProperty(property);
   };
 
-  const [form, setForm] = useState({
-    name: "",
-    address: "",
-    latitude: null,
-    longitude: null,
-    radius: 500,
-  });
-
-  const [latitude, setLatitude] = useState(1.2956358);
-  const [longitude, setLongitude] = useState(103.8338737);
-  const [address, setAddress] = useState("");
-
   return (
     <div
       className="w-full h-full overflow-hidden"
@@ -61,29 +47,10 @@ const Home: React.FC = () => {
         className={`absolute inset-0 ${activeTab !== "map" ? "overflow-y-auto" : "overflow-hidden"}`}
       >
         {activeTab === "map" && (
-          // <MapView
-          //   onInterestClick={handleInterestClick}
-          //   onChatClick={handleChatClick}
-          // />
-
-          <GoogleMaps
-          radius={form.radius}
-          address={address}
-          setAddress={setAddress}
-          latitude={latitude}
-          longitude={longitude}
-          setLatitude={setLatitude}
-          setLongitude={setLongitude}
-          style='`w-full h-full px-4 py-2 border-b-[1px] border-[#E5E5E3]`'
-          onInterestClick={handleInterestClick}
-          onChatClick={handleChatClick}
-        />
-        // <div className="flex flex-col">
-        //   <span className="text-xl">Address: ${address}</span>
-        //   <span className="text-xl">Latitude: ${latitude}</span>
-        //   <span className="text-xl">Longitude: ${longitude}</span>
-        // </div>
-         
+           <MapView
+            onInterestClick={handleInterestClick}
+            onChatClick={handleChatClick}
+          />
         )}
         {activeTab === "explore" && (
           <div className="relative">
