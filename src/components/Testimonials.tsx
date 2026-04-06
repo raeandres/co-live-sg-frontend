@@ -1,4 +1,3 @@
-import React from "react";
 import { Star, Quote } from "lucide-react";
 
 const TESTIMONIALS = [
@@ -40,7 +39,7 @@ const TESTIMONIALS = [
   },
 ];
 
-const Testimonials: React.FC = () => {
+function Testimonials() {
   return (
     <div
       className="min-h-screen pb-24 px-5 pt-8"

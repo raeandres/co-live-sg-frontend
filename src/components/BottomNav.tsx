@@ -1,4 +1,3 @@
-import React from "react";
 import { MapPin, Grid, FileText, MessageSquare } from "lucide-react";
 
 type Tab = "map" | "explore" | "interest" | "testimonials";
@@ -15,7 +14,7 @@ const tabs = [
   { id: "testimonials" as Tab, label: "Reviews", icon: MessageSquare },
 ];
 
-const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
+function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
     <nav
       className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#e8e4f0]"

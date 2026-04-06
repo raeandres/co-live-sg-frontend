@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useCallback } from "react";
 import BottomNav from "./BottomNav";
 import ExploreView from "./ExploreView";
 import InterestForm from "./InterestForm";
@@ -7,35 +7,74 @@ import ChatbotDrawer from "./ChatbotDrawer";
 import PropertySheet from "./PropertySheet";
 import { Property } from "@/data/properties";
 import MapView from "./MapView";
+
 type Tab = "map" | "explore" | "interest" | "testimonials";
 
-const Home: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<Tab>("map");
-  const [selectedPropertyId, setSelectedPropertyId] = useState<
-    string | undefined
-  >();
-  const [chatOpen, setChatOpen] = useState(false);
-  const [exploreSelectedProperty, setExploreSelectedProperty] =
-    useState<Property | null>(null);
+/**
+ * Custom hook for managing tab navigation state
+ * @param initialTab - The default tab to show on mount
+ */
+function useTabNavigation(initialTab: Tab = "map") {
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
 
-  const handleInterestClick = (propertyId: string) => {
+  const handleTabChange = useCallback((tab: Tab) => {
+    setActiveTab(tab);
+  }, []);
+
+  return { activeTab, setActiveTab, handleTabChange };
+}
+
+/**
+ * Custom hook for managing property selection state
+ */
+function usePropertySelection() {
+  const [selectedPropertyId, setSelectedPropertyId] = useState<string | undefined>();
+  const [exploreSelectedProperty, setExploreSelectedProperty] = useState<Property | null>(null);
+
+  const clearPropertySelection = useCallback(() => {
+    setSelectedPropertyId(undefined);
+    setExploreSelectedProperty(null);
+  }, []);
+
+  return {
+    selectedPropertyId,
+    setSelectedPropertyId,
+    exploreSelectedProperty,
+    setExploreSelectedProperty,
+    clearPropertySelection,
+  };
+}
+
+function Home() {
+  const { activeTab, setActiveTab, handleTabChange } = useTabNavigation();
+  const {
+    selectedPropertyId,
+    setSelectedPropertyId,
+    exploreSelectedProperty,
+    setExploreSelectedProperty,
+    clearPropertySelection,
+  } = usePropertySelection();
+  const [chatOpen, setChatOpen] = useState(false);
+
+  const handleInterestClick = useCallback((propertyId: string) => {
     setSelectedPropertyId(propertyId);
     setActiveTab("interest");
-  };
+  }, [setSelectedPropertyId, setActiveTab]);
 
-  const handleChatClick = () => {
+  const handleChatClick = useCallback(() => {
     setChatOpen(true);
-  };
+  }, []);
 
-  const handleTabChange = (tab: Tab) => {
-    setActiveTab(tab);
-    if (tab !== "interest") setSelectedPropertyId(undefined);
-    setExploreSelectedProperty(null);
-  };
+  const handleTabChangeWithReset = useCallback((tab: Tab) => {
+    handleTabChange(tab);
+    if (tab !== "interest") {
+      clearPropertySelection();
+    }
+  }, [handleTabChange, clearPropertySelection]);
 
-  const handlePropertySelectFromExplore = (property: Property) => {
+  const handlePropertySelectFromExplore = useCallback((property: Property) => {
     setExploreSelectedProperty(property);
-  };
+  }, [setExploreSelectedProperty]);
 
   return (
     <div
@@ -81,12 +120,12 @@ const Home: React.FC = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
+      <BottomNav activeTab={activeTab} onTabChange={handleTabChangeWithReset} />
 
       {/* Chatbot Drawer */}
       <ChatbotDrawer isOpen={chatOpen} onClose={() => setChatOpen(false)} />
     </div>
   );
-};
+}
 
 export default Home;

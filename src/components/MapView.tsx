@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Search, X, MapPin, Clock, Navigation, ChevronLeft, ChevronRight } from "lucide-react";
 import { PROPERTIES, Property } from "@/data/properties";
 import PropertySheet from "./PropertySheet";
@@ -25,7 +25,7 @@ const SUGGESTIONS = [
   "One-North, Singapore",
 ];
 
-const MapView: React.FC<MapViewProps> = ({ onInterestClick, onChatClick }) => {
+function MapView({ onInterestClick, onChatClick }: MapViewProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);

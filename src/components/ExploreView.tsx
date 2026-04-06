@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Search, Star, Flame, MapPin, Train, ChevronRight, Filter, SlidersHorizontal } from "lucide-react";
 import { PROPERTIES, Property } from "@/data/properties";
 
@@ -7,7 +7,7 @@ interface ExploreViewProps {
   onInterestClick: (propertyId: string) => void;
 }
 
-const ExploreView: React.FC<ExploreViewProps> = ({ onPropertySelect, onInterestClick }) => {
+function ExploreView({ onPropertySelect, onInterestClick }: ExploreViewProps) {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"demand" | "price-asc" | "price-desc" | "commute">("demand");
   const [showFilters, setShowFilters] = useState(false);

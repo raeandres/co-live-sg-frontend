@@ -56,7 +56,7 @@ interface FormData {
   propertyId: string;
 }
 
-const InterestForm: React.FC<InterestFormProps> = ({ propertyId, onBack }) => {
+function InterestForm({ propertyId, onBack }: InterestFormProps) {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     idType: "",
@@ -359,53 +359,61 @@ const inputClass = (hasError: boolean) =>
     hasError ? "border-[#E63946]" : "border-[#e8e4f0]"
   } text-[#2d2540] placeholder:text-[#9e97b0] focus:border-[#E63946] focus:ring-2 focus:ring-[#E63946]/10`;
 
-const FormField: React.FC<{
+interface FormFieldProps {
   label: string;
   error?: string;
   children: React.ReactNode;
-}> = ({ label, error, children }) => (
-  <div className="mb-4">
-    <label
-      className="block text-xs font-semibold text-[#2d2540] mb-1.5"
-      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-    >
-      {label}
-    </label>
-    {children}
-    {error && (
-      <p
-        className="mt-1 text-xs text-[#E63946]"
+}
+
+function FormField({ label, error, children }: FormFieldProps) {
+  return (
+    <div className="mb-4">
+      <label
+        className="block text-xs font-semibold text-[#2d2540] mb-1.5"
         style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
       >
-        {error}
-      </p>
-    )}
-  </div>
-);
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p
+          className="mt-1 text-xs text-[#E63946]"
+          style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+        >
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
 
-const SelectField: React.FC<{
+interface SelectFieldProps {
   value: string;
   onChange: (v: string) => void;
   placeholder: string;
   options: { value: string; label: string }[];
   hasError?: boolean;
-}> = ({ value, onChange, placeholder, options, hasError }) => (
-  <div className="relative">
-    <select
-      value={value}
-      onChange={e => onChange(e.target.value)}
-      className={`w-full px-3.5 py-3 rounded-[10px] text-sm outline-none transition-all duration-200 bg-[#faf8ff] border appearance-none pr-9 ${
-        hasError ? "border-[#E63946]" : "border-[#e8e4f0]"
-      } ${value ? "text-[#2d2540]" : "text-[#9e97b0]"} focus:border-[#E63946] focus:ring-2 focus:ring-[#E63946]/10`}
-      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-    >
-      <option value="" disabled>{placeholder}</option>
-      {options.map(opt => (
-        <option key={opt.value} value={opt.value}>{opt.label}</option>
-      ))}
-    </select>
-    <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9e97b0] pointer-events-none" />
-  </div>
-);
+}
+
+function SelectField({ value, onChange, placeholder, options, hasError }: SelectFieldProps) {
+  return (
+    <div className="relative">
+      <select
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        className={`w-full px-3.5 py-3 rounded-[10px] text-sm outline-none transition-all duration-200 bg-[#faf8ff] border appearance-none pr-9 ${
+          hasError ? "border-[#E63946]" : "border-[#e8e4f0]"
+        } ${value ? "text-[#2d2540]" : "text-[#9e97b0]"} focus:border-[#E63946] focus:ring-2 focus:ring-[#E63946]/10`}
+        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+      >
+        <option value="" disabled>{placeholder}</option>
+        {options.map(opt => (
+          <option key={opt.value} value={opt.value}>{opt.label}</option>
+        ))}
+      </select>
+      <ChevronDown size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#9e97b0] pointer-events-none" />
+    </div>
+  );
+}
 
 export default InterestForm;

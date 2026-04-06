@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { X, Send, Bot, Phone, MessageSquare, ChevronRight } from "lucide-react";
 
 interface Message {
@@ -73,7 +73,7 @@ const QUICK_QUESTIONS = [
   "How do I book a viewing?",
 ];
 
-const ChatbotDrawer: React.FC<ChatbotDrawerProps> = ({ isOpen, onClose }) => {
+function ChatbotDrawer({ isOpen, onClose }: ChatbotDrawerProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",

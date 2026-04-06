@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   X,
   ChevronLeft,
@@ -33,12 +33,12 @@ const DEMAND_COLORS: Record<string, { bg: string; text: string }> = {
   Low: { bg: "#2a9d8f/10", text: "#2a9d8f" },
 };
 
-const PropertySheet: React.FC<PropertySheetProps> = ({
+function PropertySheet({
   property,
   onClose,
   onInterestClick,
   onChatClick,
-}) => {
+}: PropertySheetProps) {
   const [activeImage, setActiveImage] = useState(0);
   const sheetRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
